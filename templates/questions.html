@@ -1,24 +1,9 @@
 {% extends 'base.html' %} {% block content %}
-
 <h2>{{questions[index].question}}</h2>
-
 <form action="/answers" method="POST">
-  <input
-    type="radio"
-    id="choice1"
-    name="choices"
-    value="{{questions[index].choices[0]}}"
-  /><label for="choice1">{{questions[index].choices[0]}}</label><br />
-  <input
-    type="radio"
-    id="choice2"
-    name="choices"
-    value="{{questions[index].choices[1]}}"
-  /><label for="choice2">{{questions[index].choices[1]}}</label><br />
-  <br />
-  <button type="submit">Submit</button>
+  {% for choice in questions[index].choices %}
+  <p><input type="radio" name="choices" value="{{choice}}" /> {{choice}}</p>
+  {% endfor %}
+  <button>Continue to next question</button>
 </form>
-
-{% for msg in get_flashed_messages() %}
-<p>{{msg}}</p>
-{% endfor %} {% endblock %}
+{% endblock %}
